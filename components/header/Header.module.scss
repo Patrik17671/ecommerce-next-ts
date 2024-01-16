@@ -1,0 +1,92 @@
+@import "styles/variables";
+
+.header{
+	@apply bg-gray1 flex items-center justify-center sticky top-0;
+	height: 7.6rem;
+	font-size: 1.6rem;
+	z-index: 10;
+	transition: $general-transition;
+	@media (min-width: $md) {
+		height: 9.6rem;
+	}
+	.container{
+		@apply h-full flex justify-between;
+	}
+	.wrapper{
+		@apply h-full w-full flex justify-between;
+	}
+	&.activeMenu{
+		@media (max-width: $md){
+			ul{
+				transform: translateX(0);
+				opacity: 1;
+				pointer-events: auto;
+			}
+			.menu{
+				opacity: 0 !important;
+				pointer-events: none !important;
+			}
+			.close{
+				opacity: 1 !important;
+				pointer-events: auto !important;
+			}
+		}
+	}
+	ul{
+		@apply flex items-center h-full;
+		transition: $general-transition;
+		@media (max-width: $md) {
+			@apply absolute w-full left-0 bg-black flex-col items-center pb-4;
+			top: 100%;
+			transform: translateX(-100%);
+			opacity: 0;
+			pointer-events: none;
+			height: fit-content;
+		}
+		li{
+			height: 50%;
+			@media (max-width: $md) {
+				width: 100%;
+				text-align: center;
+				background: $black;
+				a{
+					padding: 1rem 0;
+					justify-content: center;
+				}
+			}
+		}
+		a{
+			@apply text-black h-full flex items-center relative;
+			font-size: 1.6rem;
+			padding: 0 1.6rem;
+			margin: 0 1.6rem;
+			transition: $general-transition;
+			&:hover{
+				@apply font-bold text-primary;
+			}
+		}
+	}
+	.hamburger{
+		@apply hidden text-black relative;
+		width: 2.5rem;
+		svg{
+			@apply absolute left-0 text-black;
+			max-width: 100%;
+			top: 50%;
+			transform: translateY(-50%);
+			transition: $general-transition;
+		}
+		.close{
+			opacity: 0;
+			pointer-events: none;
+		}
+		.menu{
+			opacity: 1;
+			pointer-events: auto;
+		}
+		
+		@media (max-width: $md) {
+			@apply flex items-center;
+		}
+	}
+}

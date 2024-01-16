@@ -1,0 +1,25 @@
+@import "styles/variables";
+
+.carousel{
+	.arrows{
+		@apply bg-gray1 flex p-2 relative cursor-pointer;
+		transition: $general-transition;
+		&:hover{
+			background: darken($gray1, 10%);
+		}
+		svg{
+			width: 2rem;
+		}
+		&.arrowRight{
+			@apply right-4;
+		}
+		&.arrowLeft{
+			@apply left-4;
+		}
+	}
+	:global{
+		.slider-control-bottomcenter{
+			@apply hidden;
+		}
+	}
+}

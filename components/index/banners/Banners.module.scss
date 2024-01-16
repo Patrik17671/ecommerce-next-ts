@@ -1,0 +1,21 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply md:grid grid-cols-12;
+	max-width: 100%;
+	.main{
+		@apply flex col-span-8;
+	}
+	.side{
+		@apply col-span-4 pt-4 md:pt-0 md:pl-4 flex md:flex-col gap-4;
+		> div{
+			width: 50%;
+			@media (min-width: $md) {
+				height: 50%;
+			}
+			img{
+				@apply h-full w-full object-cover;
+			}
+		}
+	}
+}
