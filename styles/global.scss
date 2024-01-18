@@ -21,6 +21,12 @@ body{
   margin: 0 auto;
 	padding: 0 1.5rem;
 }
+a,span,strong,p,li{
+	font-size: 1.4rem;
+	@media (min-width: $md) {
+		font-size: 1.6rem;
+	}
+}
 a{
 	text-decoration: none;
 }

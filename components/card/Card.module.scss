@@ -1,0 +1,27 @@
+@import "styles/variables";
+
+.card{
+	@apply relative;
+	min-width: 20rem;
+	@media (min-width: $md) {
+		min-width: 25rem;
+		&:hover{
+			.sizes{
+				opacity: 1;
+			}
+		}
+	}
+	.name{
+		@apply md:mt-4 flex justify-between items-center;
+	}
+	.sizes{
+		@apply absolute left-0 font-bold flex items-center justify-center w-full gap-4;
+		top: 80%;
+		font-size: 1.4rem;
+		background: rgba($white, 50%);
+		transition: $general-transition;
+		@media (min-width: $md) {
+			opacity: 0;
+		}
+	}
+}

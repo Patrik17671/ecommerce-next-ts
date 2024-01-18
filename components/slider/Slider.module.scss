@@ -1,0 +1,79 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply flex relative;
+}
+.slider{
+	@apply flex gap-10 mb-4;
+	scroll-behavior: smooth;
+	padding-bottom: 15px;
+	width: 100%;
+	overflow: auto;
+	scroll-snap-type: x mandatory;
+	> *{
+		scroll-snap-align: start;
+	}
+	&::-webkit-scrollbar {
+		height: .5rem;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $gray1;
+		transition: $general-transition;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background: darken($gray1,5%);
+	}
+	.sliderContent{
+		@apply flex gap-8 relative;
+		transition: $general-transition;
+	}
+}
+
+.btn{
+	@apply absolute flex items-center justify-center opacity-0 cursor-pointer bg-transparent rounded-full ;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 4rem;
+	height: 4rem;
+	z-index: 10;
+	pointer-events: none;
+	transition: $general-transition;
+	&:hover{
+		opacity: 1;
+	}
+	svg{
+		@apply text-primary;
+	}
+	@media (max-width: $md) {
+		display: none;
+	}
+}
+.highWrapper{
+	@media(min-width: $md){
+		.btn{
+			top: 44%;
+		}
+	}
+}
+
+.visible{
+	opacity: .7;
+	pointer-events: auto;
+	svg{
+		position: relative;
+		right: 2px;
+	}
+}
+
+.btnLeft{
+	left: 2rem;
+}
+.btnRight{
+	right: 2rem;
+	svg{
+		position: relative;
+		left: 1px;
+	}
+}

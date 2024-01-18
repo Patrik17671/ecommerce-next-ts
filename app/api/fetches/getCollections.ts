@@ -1,8 +1,13 @@
 import { apiHeaders } from '../utils';
 
-type GlobalProps = {
+export type FilterCriteria = {
+  value: any;
+  operator: 'equals' | 'not_equals' | 'in' | 'nin' | string;
+};
+
+export type GlobalProps = {
   slug: string;
-  filters?: any;
+  filters?: Record<string, FilterCriteria>;
 };
 
 export async function getCollections(props: GlobalProps) {
@@ -16,7 +21,10 @@ export async function getCollections(props: GlobalProps) {
 
   if (filters && Object.keys(filters).length > 0) {
     const filterParams = Object.keys(filters)
-      .map(key => `where[${key}][equals]=${encodeURIComponent(filters[key])}`)
+      .map(key => {
+        const { value, operator } = filters[key];
+        return `where[${key}][${operator}]=${encodeURIComponent(value)}`;
+      })
       .join('&');
     url += `?${filterParams}`;
   }
@@ -37,32 +45,3 @@ export async function getCollections(props: GlobalProps) {
     throw error;
   }
 }
-
-// export async function getCollections(props: GlobalProps) {
-//   const slug = props?.slug;
-//
-//   if (!slug) {
-//     throw new Error('Error: Slug is required');
-//   }
-//
-//   let url;
-//
-//   try {
-//     const res = await fetch(
-//       `${process.env.API_BASE_URL}/api/${slug}?where[location][equals]=HOMEPAGE_MAIN`,
-//       {
-//         method: 'GET',
-//         headers: {
-//           ...apiHeaders,
-//         },
-//       },
-//     );
-//     if (!res.ok) {
-//       throw new Error(`Failed to fetch data. Status: ${res.status}`);
-//     }
-//     return res.json();
-//   } catch (error) {
-//     console.error('Error fetching hero content:', error);
-//     throw error;
-//   }
-// }

@@ -5,20 +5,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import isEmpty from 'lodash/isEmpty';
 import styles from './Banners.module.scss';
-import { CollectionType } from '@/types';
+import { BannersDocsType, CollectionType } from '@/types';
 
 const Banners = async () => {
   const mainBannersData: CollectionType = await getCollections({
     slug: 'banners',
-    filters: { location: 'HOMEPAGE_MAIN' },
+    filters: { location: { value: 'HOMEPAGE_MAIN', operator: 'equals' } },
   });
   const sideBannersData: CollectionType = await getCollections({
     slug: 'banners',
-    filters: { location: 'HOMEPAGE_MAINSIDE' },
+    filters: { location: { value: 'HOMEPAGE_MAINSIDE', operator: 'equals' } },
   });
 
-  const mainBanners = mainBannersData?.docs;
-  const sideBanners = sideBannersData?.docs;
+  const mainBanners = mainBannersData.docs as BannersDocsType[];
+  const sideBanners = sideBannersData.docs as BannersDocsType[];
 
   return (
     <div className={'container'}>
@@ -26,17 +26,17 @@ const Banners = async () => {
         <div className={styles.main}>
           {!isEmpty(mainBanners) ? (
             <Carousel>
-              {map(mainBanners, (banner, index) => {
+              {map(mainBanners, (banner, index: number) => {
                 return (
                   <div key={index} className={'relative'}>
-                    <Link href={banner.url || '/'}>
+                    <Link href={banner?.url || '/'}>
                       {banner.file.url ? (
                         <Image
                           width={800}
                           height={500}
                           src={banner.file.url}
                           sizes="(max-width: 768px) 100vw, 66vw)"
-                          alt={banner?.file?.alt}
+                          alt={banner?.file?.alt || 'photo'}
                         />
                       ) : (
                         ''
@@ -53,7 +53,7 @@ const Banners = async () => {
         <div className={styles.side}>
           {!isEmpty(sideBanners) ? (
             <>
-              {map(sideBanners, (banner, index) => {
+              {map(sideBanners, (banner, index: number) => {
                 return (
                   <div key={index} className={'relative'}>
                     <Link href={banner?.url || '/'}>

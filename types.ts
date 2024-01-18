@@ -72,8 +72,32 @@ export type BannersDocsType = {
   file: FileType;
 };
 
+export type ColorType = {
+  color: string;
+  id: string | number;
+};
+
+export type SizeType = {
+  size: string;
+  id: string | number;
+};
+
+export type ProductsDocsType = {
+  createdAt?: string;
+  updatedAt?: string;
+  id: string | number;
+  categories?: CategoriesType[];
+  description?: any;
+  colors?: ColorType[];
+  file?: FileType;
+  name: string;
+  price: string | number;
+  sizes?: SizeType[];
+  url: string;
+};
+
 export type CollectionType = {
-  docs: BannersDocsType[];
+  docs?: BannersDocsType[] | ProductsDocsType[];
   hasNextPage: boolean;
   hasPrevPage: boolean;
   limit: number;

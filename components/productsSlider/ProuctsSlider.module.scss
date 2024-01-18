@@ -1,0 +1,12 @@
+@import "styles/variables";
+
+.slider{
+	@apply my-8;
+	.title{
+		@apply mb-8 block;
+		font-size: 2rem;
+		@media (min-width: $md) {
+			font-size: 3rem;
+		}
+	}
+}

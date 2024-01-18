@@ -12,6 +12,7 @@
 			width: 50%;
 			@media (min-width: $md) {
 				height: 50%;
+				width: 100%;
 			}
 			img{
 				@apply h-full w-full object-cover;
