@@ -6,6 +6,26 @@ import styles from './page.module.scss';
 import isEmpty from 'lodash/isEmpty';
 import AddToCart from '@/components/product/addToCart/AddToCart';
 import { convertToHtml } from '@/utils';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const productData = await getCollections({
+    slug: 'products',
+    filters: { url: { value: params.slug, operator: 'equals' } },
+  });
+
+  let product;
+  if (productData.docs) {
+    product = productData.docs[0];
+  }
+  return {
+    title: product.name,
+  };
+}
 
 export async function generateStaticParams() {
   const product = await getCollections({
@@ -39,6 +59,7 @@ const Product = async ({ params }: { params: { slug: string } }) => {
                 height={500}
                 src={product.file.url}
                 alt={product?.file?.alt || 'photo'}
+                priority={true}
               />
             </div>
           ) : (

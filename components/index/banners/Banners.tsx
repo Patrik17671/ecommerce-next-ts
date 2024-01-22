@@ -29,7 +29,7 @@ const Banners = async () => {
               {map(mainBanners, (banner, index: number) => {
                 return (
                   <div key={index} className={'relative'}>
-                    <Link href={banner?.url || '/'}>
+                    <Link aria-label={'Link to somewhere'} href={banner?.url || '/'}>
                       {banner.file.url ? (
                         <Image
                           width={800}
@@ -37,6 +37,7 @@ const Banners = async () => {
                           src={banner.file.url}
                           sizes="(max-width: 768px) 100vw, 66vw)"
                           alt={banner?.file?.alt || 'photo'}
+                          priority={index == 0}
                         />
                       ) : (
                         ''
@@ -56,14 +57,14 @@ const Banners = async () => {
               {map(sideBanners, (banner, index: number) => {
                 return (
                   <div key={index} className={'relative'}>
-                    <Link href={banner?.url || '/'}>
+                    <Link aria-label={'Link to somewhere'} href={banner?.url || '/'}>
                       {banner.file.url ? (
                         <Image
                           src={banner.file.url}
                           width={300}
                           height={250}
                           sizes="(max-width: 768px) 50vw, 33vw)"
-                          alt={banner?.file?.alt}
+                          alt={banner?.file?.alt || 'photo'}
                         />
                       ) : (
                         ''
