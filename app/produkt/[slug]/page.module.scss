@@ -1,0 +1,44 @@
+@import "styles/variables";
+
+.productPage{
+	@apply py-8;
+	.wrapper{
+		@apply md:flex md:gap-10 md:justify-center;
+	}
+	.image{
+		@apply flex justify-center;
+		max-height: 50rem;
+		img{
+			@apply object-contain;
+			max-height: 100%;
+		}
+	}
+	.content{
+		@apply md:pt-10;
+		@media (min-width: $md) {
+			width: 50%;
+			max-width: 30rem;
+		}
+	}
+	.title{
+		@apply mt-3;
+	}
+	.colors{
+		@apply mb-3 flex;
+		.label{
+			@apply font-bold pr-4;
+		}
+		.list{
+			@apply flex gap-4 flex-wrap;
+		}
+	}
+	.price{
+		@apply font-bold mb-3;
+		span{
+			font-size: 2.4rem;
+		}
+	}
+	.desc{
+		@apply bg-gray1 text-black py-8 mt-10 md:py-12 md:mt-24;
+	}
+}

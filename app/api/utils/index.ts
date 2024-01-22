@@ -1,3 +1,4 @@
 export const apiHeaders = {
-  Authorization: `Bearer ${process.env.API_TOKEN}`,
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
 };

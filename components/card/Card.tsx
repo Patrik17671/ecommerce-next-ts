@@ -22,7 +22,7 @@ const Card: FC<ProductCardProps> = ({ product }) => {
             width={300}
             height={400}
             src={product.file.url}
-            alt={product?.file?.alt || 'Fotka'}
+            alt={product?.file?.alt || 'photo'}
           />
         </div>
       ) : (

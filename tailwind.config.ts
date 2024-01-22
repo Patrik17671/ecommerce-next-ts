@@ -14,6 +14,8 @@ const config: Config = {
       primary: '#3964B2',
       gray1: '#F7F7F7',
       alt1: '#242424',
+      error: '#D32F2F',
+      success: '#4CAF50',
     },
   },
   plugins: [],

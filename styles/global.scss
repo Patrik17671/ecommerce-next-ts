@@ -34,12 +34,14 @@ li{
 	list-style: none;
 }
 h1{
-	font-size: 5.6rem;
-	color: $white;
+	@apply font-bold;
+	font-size: 2.4rem;
+	@media (min-width: $md) {
+		font-size: 4rem;
+	}
 }
 h2{
 	font-size: 4.8rem;
-	color: $white;
 	margin-bottom: 2rem;
 }
 h3{

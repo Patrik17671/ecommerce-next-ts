@@ -1,0 +1,9 @@
+@import "styles/variables";
+
+.footer{
+	@apply bg-alt1;
+	height: 5rem;
+	@media (min-width: $md) {
+		height: 10rem;
+	}
+}

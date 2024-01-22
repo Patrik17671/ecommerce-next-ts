@@ -1,0 +1,29 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply my-3;
+	.btn{
+		@apply flex items-center justify-center bg-primary text-white font-bold mt-4 cursor-pointer;
+		height: 3.8rem;
+		transition: $general-transition;
+		&:hover{
+			background: darken($primary, 10%);
+		}
+		@media (min-width: $md) {
+			height: 5rem;
+		}
+		&.disabled{
+			pointer-events: none;
+			opacity: .7;
+		}
+	}
+	.msg{
+		@apply flex text-center justify-center my-4 font-bold;
+		&.error{
+			@apply text-error;
+		}
+		&.success{
+			@apply text-success;
+		}
+	}
+}

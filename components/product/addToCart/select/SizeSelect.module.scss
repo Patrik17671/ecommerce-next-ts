@@ -1,0 +1,16 @@
+@import "styles/variables";
+
+.select{
+	:global{
+		.react-select__control{
+			border-radius: 0;
+			border-color: $black;
+		}
+		.react-select__indicator{
+			@apply text-black;
+		}
+		.react-select__indicator-separator{
+			@apply hidden;
+		}
+	}
+}
