@@ -7,6 +7,7 @@ import map from 'lodash/map';
 import { FC } from 'react';
 import { HeaderType } from '@/types';
 import Link from 'next/link';
+import Cart from '@/components/header/cart/Cart';
 
 const Header: FC = async () => {
   const data: HeaderType = await getGlobals({ slug: 'header' });
@@ -47,6 +48,7 @@ const Header: FC = async () => {
             )}
           </>
         </ul>
+        <Cart />
       </div>
     </HeaderClient>
   );

@@ -36,7 +36,7 @@
 		@apply flex items-center h-full;
 		transition: $general-transition;
 		@media (max-width: $md) {
-			@apply absolute w-full left-0 bg-black flex-col items-center pb-4;
+			@apply absolute w-full left-0 flex-col items-center pb-4 bg-white;
 			top: 100%;
 			transform: translateX(-100%);
 			opacity: 0;
@@ -48,7 +48,6 @@
 			@media (max-width: $md) {
 				width: 100%;
 				text-align: center;
-				background: $black;
 				a{
 					padding: 1rem 0;
 					justify-content: center;

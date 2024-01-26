@@ -1,7 +1,8 @@
 'use client';
 import useSWR from 'swr';
 import { v4 as uuidv4 } from 'uuid';
-import { apiHeaders } from '@/app/api/utils';
+import { apiHeaders, fetcher } from '@/app/api/utils';
+import { ContactFormInputs } from '@/types';
 
 const getOrCreateCartHash = () => {
   if (typeof window === 'undefined') {
@@ -16,27 +17,27 @@ const getOrCreateCartHash = () => {
   return cartHash;
 };
 
-const fetcher = async (url: string) => {
-  const response = await fetch(url, {
-    headers: {
-      ...apiHeaders,
-    },
-  });
-  if (!response.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return response.json();
-};
-
 type UseCartOptions = {
   onSuccess?: () => void;
   onError?: () => void;
 };
 
+type UpdateCart = {
+  selectedDelivery?: string;
+  selectedPayment?: string;
+  deliveryAddress?: ContactFormInputs;
+};
+
 const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
   const cartHash = getOrCreateCartHash();
-  const { data: cart, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}&populate=items.productId`,
+  const {
+    data: cart,
+    mutate,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}&populate=items.productId&populate=selectedDelivery&populate=selectedPayment`,
     fetcher,
   );
 
@@ -63,13 +64,14 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
         },
         body: JSON.stringify({
           cartHash,
-          items: [{ productId, quantity }],
-          selectedSize: selectedSize,
+          items: [{ productId, quantity, selectedSize }],
         }),
       });
 
       if (!response.ok) throw new Error('Failed to add item to cart');
       if (onSuccess) onSuccess();
+      await mutate();
+      return response;
     } catch (error) {
       console.error(error);
       if (onError) onError();
@@ -93,10 +95,72 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
 
         if (!response.ok) throw new Error('Failed to remove item from cart');
         if (onSuccess) onSuccess();
+        await mutate();
+        return response;
       }
     } catch (error) {
       console.error(error);
       if (onError) onError();
+    }
+  };
+
+  const updateCart = async (updateData: UpdateCart) => {
+    const cartHash = getOrCreateCartHash();
+
+    try {
+      if (cart && cart.docs && cart.docs.length > 0) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`,
+          {
+            method: 'PATCH',
+            headers: {
+              ...apiHeaders,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              cartHash,
+              ...updateData,
+            }),
+          },
+        );
+
+        if (!response.ok) throw new Error('Failed to update cart');
+        if (onSuccess) onSuccess();
+        await mutate();
+        return response;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createOrder = async () => {
+    const cartHash = getOrCreateCartHash();
+
+    try {
+      if (cart && cart.docs && cart.docs.length > 0) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`,
+          {
+            method: 'PATCH',
+            headers: {
+              ...apiHeaders,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              cartHash,
+              createOrder: true,
+            }),
+          },
+        );
+
+        if (!response.ok) throw new Error('Failed to create order');
+        if (onSuccess) onSuccess();
+        await mutate();
+        return response;
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -115,6 +179,7 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
       if (!response.ok) throw new Error('Failed to delete cart');
       localStorage.removeItem('cartHash');
       if (onSuccess) onSuccess();
+      await mutate();
     } catch (error) {
       console.error(error);
       if (onError) onError();
@@ -124,9 +189,12 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
   return {
     cart,
     addToCart,
+    updateCart,
     deleteCart,
+    createOrder,
     removeFromCart,
-    isLoading: !error && !cart,
+    isLoading: isLoading,
+    isValidating: isValidating,
     isError: error,
   };
 };

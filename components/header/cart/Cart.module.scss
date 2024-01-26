@@ -1,0 +1,24 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply flex items-center justify-center;
+	.btn{
+		@apply relative cursor-pointer;
+		&:hover{
+			svg{
+				@apply text-primary;
+			}
+		}
+		svg{
+			@apply text-black;
+			width: 2.5rem;
+			transition: $general-transition;
+		}
+		.counter{
+			@apply absolute font-bold;
+			font-size: 1.2rem;
+			right: 0;
+			top: -0.7rem;
+		}
+	}
+}

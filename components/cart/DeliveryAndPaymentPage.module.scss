@@ -1,0 +1,33 @@
+@import "styles/variables";
+
+.wrapper{
+	h4{
+		@apply font-bold mb-4;
+		font-size: 2rem;
+	}
+	.disabled{
+		opacity: .7;
+		pointer-events: none;
+	}
+	.infoText{
+		@apply relative;
+		font-size: 1.4rem;
+		bottom: 1rem;
+	}
+	.btn{
+		@apply bg-primary text-white font-bold flex items-center justify-center cursor-pointer mt-8;
+		height: 3.8rem;
+		width: 100%;
+		font-size: 1.4rem;
+		transition: $general-transition;
+		&:hover{
+			background: darken($primary, 10%);
+		}
+		@media (min-width: $md) {
+			@apply ml-auto;
+			height: 4.5rem;
+			max-width: 25rem;
+			font-size: 1.6rem;
+		}
+	}
+}

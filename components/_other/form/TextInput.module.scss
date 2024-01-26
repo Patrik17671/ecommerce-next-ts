@@ -1,0 +1,26 @@
+@import "styles/variables";
+
+.inputWrap{
+	@apply flex flex-col gap-4 pb-8;
+	&.error{
+		label{
+			@apply text-error;
+		}
+		input{
+			@apply border-error;
+		}
+	}
+	label{
+		@apply font-bold text-black;
+		font-size: 1.4rem;
+	}
+	input{
+		@apply border border-black px-4;
+		height: 4.5rem;
+		font-size: 1.4rem;
+	}
+	.error{
+		@apply text-error font-bold;
+		font-size: 1.4rem;
+	}
+}

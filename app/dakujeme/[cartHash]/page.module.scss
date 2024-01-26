@@ -1,0 +1,21 @@
+@import "styles/variables";
+
+.title{
+	@apply text-center;
+	word-break: break-word;
+}
+.content{
+	@apply flex flex-col-reverse items-center md:justify-center md:items-start md:flex-row mt-10 pb-20;
+	h4{
+		@apply font-bold mb-4;
+		font-size: 2rem;
+		@media (min-width: $md) {
+			font-size: 2.8rem;
+		}
+	}
+	.parameters{
+		span{
+			@apply block mb-3;
+		}
+	}
+}

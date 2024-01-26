@@ -96,8 +96,16 @@ export type ProductsDocsType = {
   url: string;
 };
 
+export type PaymentOptionsType = {
+  createdAt?: string;
+  updatedAt?: string;
+  id: string;
+  name: string;
+  price: number;
+};
+
 export type CollectionType = {
-  docs?: BannersDocsType[] | ProductsDocsType[];
+  docs?: BannersDocsType[] | ProductsDocsType[] | PaymentOptionsType[];
   hasNextPage: boolean;
   hasPrevPage: boolean;
   limit: number;
@@ -107,4 +115,28 @@ export type CollectionType = {
   prevPage: null | number;
   totalDocs: number;
   totalPages: number;
+};
+
+export type ContactFormInputs = {
+  name: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  town: string;
+};
+
+export type SelectedData = {
+  deliveryId: string | null;
+  paymentId: string | null;
+};
+
+export type SetSelectedData = (
+  value: SelectedData | ((prevSelectedData: SelectedData) => SelectedData),
+) => void;
+
+export type CartItems = {
+  id: string;
+  quantity: number;
+  selectedSize: string;
+  productId: ProductsDocsType;
 };

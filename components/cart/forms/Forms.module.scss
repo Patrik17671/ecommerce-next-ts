@@ -1,0 +1,46 @@
+@import "styles/variables";
+
+.btn{
+	@apply bg-primary text-white font-bold text-center block cursor-pointer;
+	height: 3.8rem;
+	width: 100%;
+	font-size: 1.4rem;
+	transition: $general-transition;
+	&:hover{
+		background: darken($primary, 10%);
+	}
+	@media (min-width: $md) {
+		@apply ml-auto;
+		height: 4.5rem;
+		max-width: 25rem;
+		font-size: 1.6rem;
+	}
+}
+
+.formItem{
+	@apply p-8 flex items-center border border-black cursor-pointer;
+	height: 6rem;
+	transition: $general-transition;
+	&:hover{
+		background: $gray1;
+	}
+	&.selected{
+		@apply shadow-lg;
+		.checkbox{
+			@apply bg-primary;
+		}
+	}
+	.checkbox{
+		@apply border border-primary rounded-full mr-10;
+		width: 2rem;
+		min-width: 2rem;
+		height: 2rem;
+		min-height: 2rem;
+	}
+	.content{
+		@apply flex justify-between w-full;
+		span{
+			@apply font-bold
+		}
+	}
+}

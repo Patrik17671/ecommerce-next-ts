@@ -1,0 +1,15 @@
+@import "styles/variables";
+
+.card{
+	@apply flex gap-8 relative;
+	z-index: 1;
+}
+.content{
+	@apply py-8 flex flex-col;
+	.qty,.size{
+		font-size: 1.2rem;
+		strong{
+			font-size: 1.2rem;
+		}
+	}
+}
