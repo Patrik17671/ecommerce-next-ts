@@ -27,6 +27,7 @@ const DeliveryAndPaymentPage = () => {
     cartHash = cart?.docs[0]?.cartHash;
   }
 
+  const [canOrder, setCanOrder] = useState<boolean>(false);
   const [deliveryOptions, setDeliveryOptions] = useState<PaymentOptionsType[] | null>(null);
   const [paymentsOptions, setPaymentsOptions] = useState<PaymentOptionsType[] | null>(null);
   const [selectedData, setSelecetedData] = useState<SelectedData>({
@@ -45,7 +46,15 @@ const DeliveryAndPaymentPage = () => {
       updateCart({
         selectedDelivery: selectedData.deliveryId,
         selectedPayment: selectedData.paymentId,
-      });
+      })
+        .then(r => {
+          if (r?.ok) {
+            setCanOrder(true);
+          }
+        })
+        .catch(error => {
+          console.error('Error on server side:', error);
+        });
     }
   }, [delivery, payments, selectedData]);
 
@@ -93,7 +102,10 @@ const DeliveryAndPaymentPage = () => {
         ''
       )}
       <div>
-        <span className={styles.btn} onClick={handleCreateOrder}>
+        <span
+          className={`${styles.btn} ${!canOrder ? styles.disabled : ''}`}
+          onClick={handleCreateOrder}
+        >
           Objednať
         </span>
       </div>
