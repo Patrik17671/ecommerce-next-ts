@@ -11,7 +11,6 @@ type ItemsProps = {
 };
 
 const Items: FC<ItemsProps> = ({ items }) => {
-  console.log(items);
   return (
     <div className={'flex flex-col gap-8'}>
       {map(items, (item, index) => {

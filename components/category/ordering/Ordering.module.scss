@@ -1,0 +1,7 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply my-8 relative;
+	max-width: 15rem;
+	z-index: 20;
+}

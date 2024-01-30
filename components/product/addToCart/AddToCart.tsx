@@ -4,11 +4,11 @@ import useCart from '@/app/api/utils/hooks/useCart';
 import { FC, useState } from 'react';
 import SizesSelect from '@/components/product/addToCart/select/SizesSelect';
 import isEmpty from 'lodash/isEmpty';
-import { SizeType } from '@/types';
+import { ParameterType } from '@/types';
 
 type AddToCartProps = {
   productId: string;
-  sizes: SizeType[];
+  sizes: ParameterType[];
 };
 const AddToCart: FC<AddToCartProps> = ({ productId, sizes }) => {
   const [success, setSuccess] = useState<string | null>(null);

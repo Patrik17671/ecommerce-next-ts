@@ -8,11 +8,11 @@ const Home = async () => {
   const results: [CollectionType, CollectionType] = await Promise.all([
     getCollections({
       slug: 'products',
-      filters: { 'categories.title': { value: 'Muži', operator: 'contains' } },
+      filters: { 'categories.value': { value: 'muzi', operator: 'contains' } },
     }),
     getCollections({
       slug: 'products',
-      filters: { 'categories.title': { value: 'Ženy', operator: 'contains' } },
+      filters: { 'categories.value': { value: 'zeny', operator: 'contains' } },
     }),
   ]);
 

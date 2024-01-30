@@ -1,0 +1,20 @@
+@import "styles/variables";
+
+.wrapper{
+	@apply flex justify-center items-center gap-1;
+	a{
+		@apply p-2;
+		&.active{
+			@apply font-bold text-primary;
+		}
+		@media (min-width: $md) {
+			font-size: 2rem;
+		}
+	}
+	.btn{
+		svg{
+			@apply text-primary;
+			width: 1.5rem;
+		}
+	}
+}

@@ -1,7 +1,6 @@
 import { getCollections } from '@/app/api/fetches/getCollections';
 import map from 'lodash/map';
 import Image from 'next/image';
-import ConsoleLog from '@/utils/consoleLog';
 import styles from './page.module.scss';
 import isEmpty from 'lodash/isEmpty';
 import AddToCart from '@/components/product/addToCart/AddToCart';
@@ -72,7 +71,7 @@ const Product = async ({ params }: { params: { slug: string } }) => {
                 <span className={styles.label}>Farby:</span>
                 <div className={styles.list}>
                   {map(product?.colors, (colors, index) => {
-                    return <span key={index}>{colors?.color}</span>;
+                    return <span key={index}>{colors?.name}</span>;
                   })}
                 </div>
               </div>

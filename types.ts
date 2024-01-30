@@ -72,14 +72,12 @@ export type BannersDocsType = {
   file: FileType;
 };
 
-export type ColorType = {
-  color: string;
+export type ParameterType = {
   id: string | number;
-};
-
-export type SizeType = {
-  size: string;
-  id: string | number;
+  createdAt?: string;
+  updatedAt?: string;
+  name: string;
+  value?: string;
 };
 
 export type ProductsDocsType = {
@@ -88,11 +86,11 @@ export type ProductsDocsType = {
   id: string | number;
   categories?: CategoriesType[];
   description?: any;
-  colors?: ColorType[];
+  colors?: ParameterType[];
   file?: FileType;
   name: string;
   price: string | number;
-  sizes?: SizeType[];
+  sizes?: ParameterType[];
   url: string;
 };
 

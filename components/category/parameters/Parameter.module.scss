@@ -1,0 +1,25 @@
+@import "styles/variables";
+
+.list{
+	@apply flex flex-col gap-4;
+	strong{
+		@apply mt-8;
+	}
+	.item{
+		@apply flex items-center gap-4 cursor-pointer;
+		&:hover{
+			@apply underline;
+		}
+		&.active{
+			@apply font-bold;
+			.checkbox{
+				@apply bg-primary;
+			}
+		}
+		.checkbox{
+			@apply border border-black;
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
+}

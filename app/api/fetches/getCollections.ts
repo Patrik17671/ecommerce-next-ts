@@ -8,10 +8,12 @@ export type FilterCriteria = {
 export type GlobalProps = {
   slug: string;
   filters?: Record<string, FilterCriteria>;
+  page?: string | number;
+  sort?: string;
 };
 
 export async function getCollections(props: GlobalProps) {
-  const { slug, filters } = props;
+  const { slug, filters, page, sort } = props;
 
   if (!slug) {
     throw new Error('Error: Slug is required');
@@ -19,14 +21,26 @@ export async function getCollections(props: GlobalProps) {
 
   let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/${slug}`;
 
+  let queryParams = [];
+
   if (filters && Object.keys(filters).length > 0) {
-    const filterParams = Object.keys(filters)
-      .map(key => {
-        const { value, operator } = filters[key];
-        return `where[${key}][${operator}]=${encodeURIComponent(value)}`;
-      })
-      .join('&');
-    url += `?${filterParams}`;
+    const filterParams = Object.keys(filters).map(key => {
+      const { value, operator } = filters[key];
+      return `where[${key}][${operator}]=${encodeURIComponent(value)}`;
+    });
+    queryParams.push(...filterParams);
+  }
+
+  if (page) {
+    queryParams.push(`page=${page}`);
+  }
+
+  if (sort) {
+    queryParams.push(`sort=${sort}`);
+  }
+
+  if (queryParams.length > 0) {
+    url += `?${queryParams.join('&')}`;
   }
 
   try {

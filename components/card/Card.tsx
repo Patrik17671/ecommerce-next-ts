@@ -7,10 +7,11 @@ import { FC } from 'react';
 
 type ProductCardProps = {
   product: ProductsDocsType;
+  isCategory?: boolean;
 };
-const Card: FC<ProductCardProps> = ({ product }) => {
+const Card: FC<ProductCardProps> = ({ product, isCategory = false }) => {
   return (
-    <div className={styles?.card}>
+    <div className={`${styles?.card} ${isCategory ? styles.category : ''}`}>
       <Link
         href={`/produkt/${product.url}`}
         className={'abs-link'}
@@ -34,12 +35,12 @@ const Card: FC<ProductCardProps> = ({ product }) => {
       </div>
       <div className={styles?.sizes}>
         {map(product?.sizes, (size, index) => {
-          return <span key={index}>{size?.size}</span>;
+          return <span key={index}>{size?.name}</span>;
         })}
       </div>
       <div>
         {map(product?.colors, (color, index) => {
-          return <span key={index}>{color?.color}</span>;
+          return <span key={index}>{color?.name}</span>;
         })}
       </div>
     </div>

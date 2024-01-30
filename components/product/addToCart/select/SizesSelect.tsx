@@ -2,12 +2,12 @@
 import Select from 'react-select';
 import map from 'lodash/map';
 import styles from './SizeSelect.module.scss';
-import { SizeType } from '@/types';
+import { ParameterType } from '@/types';
 import { FC } from 'react';
 
 type SizesSelectProps = {
   setSelectedSize: (value: string) => void;
-  sizes: SizeType[];
+  sizes: ParameterType[];
 };
 
 type SelectedOptionType = {
@@ -16,7 +16,7 @@ type SelectedOptionType = {
 };
 
 const SizesSelect: FC<SizesSelectProps> = ({ sizes, setSelectedSize }) => {
-  const options = map(sizes, size => ({ value: size.size, label: size.size }));
+  const options = map(sizes, size => ({ value: size.name, label: size.name }));
 
   const handleChange = (selectedOption: SelectedOptionType | null) => {
     if (selectedOption?.value) {
