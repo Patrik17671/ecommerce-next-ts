@@ -23,10 +23,12 @@ const renderNode = (node: Node): string => {
   }
 };
 
+//convert "rich text" from db to string
 export const convertToHtml = (data: Node[]): string => {
   return data?.map(item => renderNode(item)).join('');
 };
 
+//Format href for category filter parameters
 export const formatFilterString = (
   pathname: string,
   filterString: string | null,
@@ -66,6 +68,7 @@ export const formatFilterString = (
   return newFilterString ? `${pathname}?filter=${newFilterString}` : pathname;
 };
 
+// check if is category filter parameter active
 export const isFilterActive = (
   filterData: string | null,
   group: string,
@@ -82,6 +85,7 @@ export const isFilterActive = (
   return filters[group]?.includes(value);
 };
 
+//Create href for pagination and ordering
 export const createQueryString = (
   name: string,
   value: string,

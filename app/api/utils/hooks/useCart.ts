@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { apiHeaders, fetcher } from '@/app/api/utils';
 import { ContactFormInputs } from '@/types';
 
+// Retrieves or creates a unique cart identifier stored in the local storage
 const getOrCreateCartHash = () => {
   if (typeof window === 'undefined') {
     return null;
@@ -28,8 +29,10 @@ type UpdateCart = {
   deliveryAddress?: ContactFormInputs;
 };
 
+// Custom hook to manage cart operations
 const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
   const cartHash = getOrCreateCartHash();
+  // Fetch the current cart data using SWR for data fetching and local state caching
   const {
     data: cart,
     mutate,
@@ -52,6 +55,7 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
       let method = 'POST';
       let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts`;
 
+      // If a cart already exists, update it instead of creating a new one
       if (cart && cart.docs && cart.docs.length > 0) {
         method = 'PATCH';
         url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`;
@@ -104,6 +108,7 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
     }
   };
 
+  //Update cart use for updating address and delivery options
   const updateCart = async (updateData: UpdateCart) => {
     const cartHash = getOrCreateCartHash();
 

@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Popis
 
-## Getting Started
+Ukážka jednoduchého e-shopu napojeného na Payload CMS bežiaceho na MongoDB. Snažil som sa ho optimalizovať
+pre čo najlepšie výsledky v PageSpeed Insights. Vytvoril som si vlastný produktový karusel, aby som
+minimalizoval veľkosť JavaScriptu. Využil som najnovšie funkcie Next.js, ako je posielanie serverového
+obsahu do klientského wrapperu prostredníctvom children prop. Pre detail produktu som využil princíp SSG
+(Static Site Generation). Pri dizajne som postupoval "mobile-first" technikou a použil som Tailwind CSS
+spolu so SCSS na štylizáciu. Pre dáta, ktoré som potreboval načítať na klientskej strane, som si vytvoril
+vlastné routy, kde využívam už pripravené serverové fetches a načítavam ich za pomoci knižnice "SWR",
+ktorej hlavnou výhodou je automatické cachovanie dát.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is a demonstration of a simple e-commerce platform connected to Payload CMS running on MongoDB. 
+I have optimized it for the best possible PageSpeed Insights scores. To minimize the JavaScript footprint, 
+I created a custom product carousel. I utilized the latest features of Next.js, such as sending server-side
+content to a client-side wrapper through the children prop. For product details, I employed the SSG
+(Static Site Generation) principle. The design follows a "mobile-first" approach, and I used Tailwind 
+CSS along with SCSS for styling. For data that needed to be fetched on the client side, I created custom
+routes that leverage pre-existing server-side fetches, fetching them using the "SWR" library, which 
+offers automatic data caching as its main advantage

@@ -12,6 +12,12 @@ export type GlobalProps = {
   sort?: string;
 };
 
+/*
+	EXAMPLE OF COMPLETE URL FOR FILTER PRODUCTS
+
+	/api/products?where[categories.value][contains]=muzi&where[sizes.value][in]=m,xl&where[colors.value][in]=fialova,zelena&page=1&sort=-createdAt
+ */
+
 export async function getCollections(props: GlobalProps) {
   const { slug, filters, page, sort } = props;
 

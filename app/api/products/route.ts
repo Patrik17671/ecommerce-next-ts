@@ -9,6 +9,15 @@ type Filters = {
   [key: string]: Filter;
 };
 
+/*
+	EXAMPLE OF FILTERS OBJECT
+	{
+	  'categories.value': { value: 'muzi', operator: 'contains' },
+	  'sizes.value': { value: [ 'm', 'xl' ], operator: 'in' },
+	  'colors.value': { value: [ 'fialova', 'zelena' ], operator: 'in' }
+	}
+ */
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const filters: Filters = {};
@@ -21,10 +30,15 @@ export async function GET(request: Request) {
   }
 
   searchParams.forEach((value, key) => {
+    // If the current key is 'filter', process it to set up filtering criteria
     if (key === 'filter') {
+      // Split the filter value by '|' to get individual filter rules
       const filterParts = value.split('|');
       filterParts.forEach(part => {
+        // For each filter part, split by ':' to separate the filter field from its values
         const [filterKey, filterValues] = part.split(':');
+        // Split the filter values by ',' and assign them to the filters object
+        // Use the 'in' operator to indicate that the field value should match any of the specified values
         filters[`${filterKey}.value`] = { value: filterValues.split(','), operator: 'in' };
       });
     } else if (key === 'page') {
