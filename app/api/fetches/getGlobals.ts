@@ -17,6 +17,7 @@ export async function getGlobals(props: GlobalProps) {
       headers: {
         ...apiHeaders,
       },
+      next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
     });
     if (!res.ok) {
       throw new Error(`Failed to fetch data. Status: ${res.status}`);

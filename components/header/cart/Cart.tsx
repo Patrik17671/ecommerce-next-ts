@@ -14,7 +14,7 @@ const Cart = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Link href={'/kosik'} className={styles.btn}>
+      <Link href={'/kosik'} aria-label={'Link to cart'} className={styles.btn}>
         {cartCount > 0 ? <span className={styles.counter}>{cartCount}</span> : ''}
         <IconCart />
       </Link>

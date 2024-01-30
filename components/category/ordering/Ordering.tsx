@@ -17,8 +17,8 @@ const SortingSelect = () => {
 
   const options: any = [
     { value: '-createdAt', label: 'Najnovšie' },
-    { value: '-price', label: 'Cena ▲' },
-    { value: 'price', label: 'Cena ▼' },
+    { value: '-price', label: 'Cena ▼' },
+    { value: 'price', label: 'Cena ▲' },
   ];
 
   const formatLabel = ({ label, value }: OptionType) => (

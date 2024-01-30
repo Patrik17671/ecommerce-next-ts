@@ -2,7 +2,7 @@
 
 .sidebar{
 	@apply bg-white fixed left-0 w-full h-full p-8;
-	z-index: 20;
+	z-index: 30;
 	opacity: 0;
 	transform: translateX(-100%);
 	transition: $general-transition;
@@ -25,7 +25,7 @@
 	height: 3.5rem;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 21;
+	z-index: 31;
 	&:hover{
 		background: darken($primary, 10%);
 	}
