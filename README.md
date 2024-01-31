@@ -1,3 +1,5 @@
+https://ecommerce-spilus.vercel.app/
+
 ## Popis
 
 Ukážka jednoduchého e-shopu napojeného na Payload CMS bežiaceho na MongoDB. Snažil som sa ho optimalizovať
