@@ -5,7 +5,7 @@ export async function POST(request: Request) {
 	try {
 		const body = await request.json();
 		const cartHash = body?.cartHash;
-		let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts`;
+		let url = `${process.env.API_BASE_URL}/api/carts`;
 
 		if (!cartHash) {
 			return new Response(JSON.stringify({ error: "Cart hash is required" }), {

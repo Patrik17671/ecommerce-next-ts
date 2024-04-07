@@ -12,7 +12,7 @@ export async function getGlobals(props: GlobalProps) {
   }
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/globals/${slug}`, {
+    const res = await fetch(`${process.env.API_BASE_URL}/api/globals/${slug}`, {
       method: 'GET',
       headers: {
         ...apiHeaders,

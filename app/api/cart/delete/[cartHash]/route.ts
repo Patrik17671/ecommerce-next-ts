@@ -5,7 +5,7 @@ export async function DELETE(request: Request ,{ params }: { params: { cartHash:
 	try {
 		const cartHash = params.cartHash;
 
-		let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}`;
+		let url = `${process.env.API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}`;
 
 		if (!cartHash) {
 			return new Response(JSON.stringify({ error: "Cart hash is required" }), {

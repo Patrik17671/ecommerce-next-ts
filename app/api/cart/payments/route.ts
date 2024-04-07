@@ -2,7 +2,7 @@ import {apiHeaders} from "@/app/api/utils";
 
 export async function GET(request: Request) {
 	try {
-		const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/payments`, {
+		const res = await fetch(`${process.env.API_BASE_URL}/api/payments`, {
 			headers: {
 				...apiHeaders,
 			},

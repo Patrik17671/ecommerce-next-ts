@@ -25,7 +25,7 @@ export async function getCollections(props: GlobalProps) {
     throw new Error('Error: Slug is required');
   }
 
-  let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/${slug}`;
+  let url = `${process.env.API_BASE_URL}/api/${slug}`;
 
   let queryParams = [];
 

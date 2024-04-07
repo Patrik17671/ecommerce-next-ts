@@ -6,7 +6,7 @@ export async function PATCH(request: Request ,{ params }: { params: { id: string
 		const body = await request.json();
 		const cartHash = body?.cartHash;
 		const id = params.id;
-		let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${id}`;
+		let url = `${process.env.API_BASE_URL}/api/carts/${id}`;
 
 		if (!cartHash) {
 			return new Response(JSON.stringify({ error: "Cart hash is required" }), {

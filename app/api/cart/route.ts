@@ -14,11 +14,11 @@ export async function GET(request: Request) {
 			});
 		}
 
-		const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}&populate=items.productId&populate=selectedDelivery&populate=selectedPayment`, {
+		const res = await fetch(`${process.env.API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}&populate=items.productId&populate=selectedDelivery&populate=selectedPayment`, {
 			headers: {
 				...apiHeaders,
 			},
-		  cache: 'no-store' 
+		  cache: 'no-store'
 		});
 
 		if (!res.ok) {
