@@ -16,11 +16,11 @@ const DeliveryAndPaymentPage = () => {
   let cartData;
 
   const { data: delivery } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/delivery`,
+    `/api/cart/delivery`,
     fetcher,
   );
   const { data: payments } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/payments`,
+    `/api/cart/payments`,
     fetcher,
   );
   if (cart && cart?.docs && cart?.docs.length > 0) {
