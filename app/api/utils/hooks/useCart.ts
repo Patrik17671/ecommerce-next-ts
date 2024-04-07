@@ -40,7 +40,7 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
     isValidating,
     isLoading,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}&populate=items.productId&populate=selectedDelivery&populate=selectedPayment`,
+    `/api/cart?cartHash=${cartHash}`,
     fetcher,
   );
 
@@ -53,19 +53,19 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
 
     try {
       let method = 'POST';
-      let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts`;
+      let url = `/api/cart/post`;
 
       // If a cart already exists, update it instead of creating a new one
       if (cart && cart.docs && cart.docs.length > 0) {
         method = 'PATCH';
-        url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`;
+        url = `/api/cart/patch/${cart.docs[0].id}`;
       }
 
       const response = await fetch(url, {
         method: method,
-        headers: {
-          ...apiHeaders,
-        },
+	      headers: {
+		      'Content-Type': 'application/json',
+	      },
         body: JSON.stringify({
           cartHash,
           items: [{ productId, quantity, selectedSize }],
@@ -87,12 +87,12 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
 
     try {
       if (cart && cart.docs && cart.docs.length > 0) {
-        let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`;
+        let url = `/api/cart/patch/${cart.docs[0].id}`;
 
         const response = await fetch(url, {
           method: 'PATCH',
           headers: {
-            ...apiHeaders,
+	          'Content-Type': 'application/json',
           },
           body: JSON.stringify({ cartHash, itemsToRemove: [productId] }),
         });
@@ -115,11 +115,10 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
     try {
       if (cart && cart.docs && cart.docs.length > 0) {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`,
+          `/api/cart/patch/${cart.docs[0].id}`,
           {
             method: 'PATCH',
             headers: {
-              ...apiHeaders,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -145,11 +144,10 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
     try {
       if (cart && cart.docs && cart.docs.length > 0) {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts/${cart.docs[0].id}`,
+          `/api/cart/patch/${cart.docs[0].id}`,
           {
             method: 'PATCH',
             headers: {
-              ...apiHeaders,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -172,12 +170,12 @@ const useCart = ({ onSuccess, onError }: UseCartOptions = {}) => {
   const deleteCart = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/carts?where[cartHash][equals]=${cartHash}`,
+        `/api/cart/delete/${cartHash}`,
         {
           method: 'DELETE',
-          headers: {
-            ...apiHeaders,
-          },
+	        headers: {
+		        'Content-Type': 'application/json',
+	        },
         },
       );
 
